@@ -246,16 +246,17 @@ public String addChar(String str, char ch, int position) {
             showMessageDialog(rootPane, "Vui lòng chọn file cần mã hoá ");
 
         }
-        if (gioiHanKyTu(txt_key.getText()) == false) {
-          /*  txt_key.setText("");
+        
+       /* if (gioiHanKyTu(txt_key.getText()) == false) {
+            txt_key.setText("");
             txt_key.setText("");
             JOptionPane.showMessageDialog(null, "Phải nhập đủ 8 ký tự!!!");
-            return;*/
-        } else {
+            return;
+        }*/ else {
 
             try {
                 // TODO add your handling code here:
-                try {
+          
                     client = new Socket("localhost", 8080);
                     din = new DataInputStream(client.getInputStream());
                     dout = new DataOutputStream(client.getOutputStream());
@@ -276,12 +277,9 @@ public String addChar(String str, char ch, int position) {
 */
                     String x=din.readUTF();
                      showMessageDialog(rootPane, x);
-                    client.close();
+                 
 
-                } catch (IOException ex) {
-                    Logger.getLogger(loginFOrm.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
+            
                 din.close();
                 dout.close();
                 client.close();

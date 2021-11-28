@@ -708,9 +708,10 @@ public class ServerTcp {
                          String plaintext_file_input = din.readUTF();
                        FileInputStream fis = new FileInputStream(plaintext_file_input);
 	FileOutputStream fos = new FileOutputStream(plaintext_file_input);
-	
+	                       
                  
                     String key = din.readUTF();
+                     System.out.println(key);
                      encrypt(key, fis, fos);   
                     dout.writeUTF("thanh cong");
                 }
