@@ -29,6 +29,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 import java.lang.*;
+import javax.swing.*;
+
+import java.math.BigInteger;
 
 /**
  *
@@ -62,7 +65,7 @@ public class DES_ENCRYPT_FILE extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        folder_chooser_btn = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -79,8 +82,10 @@ public class DES_ENCRYPT_FILE extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        txt_dir_file_encrypt = new javax.swing.JTextField();
         content_file_source = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        txt_dir_file_encrypt1 = new javax.swing.JTextField();
+        jButton3 = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -96,14 +101,17 @@ public class DES_ENCRYPT_FILE extends javax.swing.JFrame {
         jLabel2.setText("File decrypt");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 323, 100, -1));
 
-        jButton1.setText("Chọn File Mã Hoá");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        folder_chooser_btn.setForeground(new java.awt.Color(255, 0, 0));
+        folder_chooser_btn.setText("Chọn folder chứa file mã hoá");
+        folder_chooser_btn.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 0)));
+        folder_chooser_btn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                folder_chooser_btnActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 79, -1, -1));
+        getContentPane().add(folder_chooser_btn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 210, 200, 30));
 
+        jButton2.setForeground(new java.awt.Color(255, 51, 0));
         jButton2.setText("Chọn File giải mã");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,12 +121,14 @@ public class DES_ENCRYPT_FILE extends javax.swing.JFrame {
         getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 323, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
-        jLabel4.setText("Đường Dẫn vừa chọn:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 122, -1, -1));
+        jLabel4.setText("Chọn Folder ");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel5.setText("Đường Dẫn vừa chọn:");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 379, -1, -1));
+
+        content_file_des.setFont(new java.awt.Font("Consolas", 0, 13)); // NOI18N
         getContentPane().add(content_file_des, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 420, 436, 34));
         getContentPane().add(txt_dir_filedes, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 372, 432, 39));
 
@@ -128,7 +138,7 @@ public class DES_ENCRYPT_FILE extends javax.swing.JFrame {
         getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 20, 287, 28));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 153, 153));
+        jLabel7.setForeground(new java.awt.Color(0, 0, 255));
         jLabel7.setText("DỮ LIỆU ĐƯỢC CHUYỂN THÀNH CHUỖI KÍ TỰ HOA");
         getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(700, 70, -1, -1));
 
@@ -141,8 +151,8 @@ public class DES_ENCRYPT_FILE extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(51, 0, 255));
         jLabel3.setText("KEY");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 218, -1, -1));
-        getContentPane().add(txt_key, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 213, 436, 34));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 270, -1, -1));
+        getContentPane().add(txt_key, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 260, 436, 34));
 
         encypt_file.setBackground(new java.awt.Color(255, 51, 51));
         encypt_file.setForeground(new java.awt.Color(240, 240, 240));
@@ -157,11 +167,21 @@ public class DES_ENCRYPT_FILE extends javax.swing.JFrame {
         decrypt_file.setBackground(new java.awt.Color(255, 255, 102));
         decrypt_file.setForeground(new java.awt.Color(51, 51, 255));
         decrypt_file.setText("DECRYPT");
+        decrypt_file.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                decrypt_fileActionPerformed(evt);
+            }
+        });
         getContentPane().add(decrypt_file, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 480, 90, 50));
 
         jButton6.setBackground(new java.awt.Color(255, 51, 255));
         jButton6.setForeground(new java.awt.Color(255, 255, 0));
         jButton6.setText("BACK");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
         getContentPane().add(jButton6, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 480, 90, 50));
 
         jLabel9.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
@@ -171,11 +191,25 @@ public class DES_ENCRYPT_FILE extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
         jLabel10.setText("Nội Dung File:");
         getContentPane().add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 170, -1, -1));
-        getContentPane().add(txt_dir_file_encrypt, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 117, 436, 34));
         getContentPane().add(content_file_source, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 160, 436, 34));
 
-        jLabel8.setIcon(new javax.swing.ImageIcon("E:\\PROJECT_GROUP3\\image\\photo-1513542789411-b6a5d4f31634.jpg")); // NOI18N
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1170, 550));
+        jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 18)); // NOI18N
+        jLabel11.setText("Đường Dẫn vừa chọn:");
+        getContentPane().add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(43, 122, -1, -1));
+        getContentPane().add(txt_dir_file_encrypt1, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 117, 436, 34));
+
+        jButton3.setForeground(new java.awt.Color(255, 0, 0));
+        jButton3.setText("Chọn File Cần Mã Hoá");
+        jButton3.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 0, 255)));
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(222, 79, 200, 30));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon("E:\\PROJECT_GROUP3\\image\\annie-spratt-0ZPSX_mQ3xI-unsplash (1).jpg")); // NOI18N
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1160, 590));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -187,38 +221,31 @@ public String addChar(String str, char ch, int position) {
     str.getChars(position, len, updatedArr, position + 1);
     return new String(updatedArr);
 }
-     String s1="";
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        JFileChooser jFileChooser = new JFileChooser();
-        jFileChooser.setMultiSelectionEnabled(false);
-         int x =   jFileChooser.showDialog(this, "Chọn File ");
-      if   (x == JFileChooser.APPROVE_OPTION) {
-      
-          File f = jFileChooser.getSelectedFile();
-          txt_dir_file_encrypt.setText(f.getAbsolutePath());
+//create function to convey tring to hex
+public String toHex(String arg) {
+    return String.format("%040x", new BigInteger(1, arg.getBytes(/*YOUR_CHARSET?*/)));
+}
+
+     String s1="",folder_path="";
+    private void folder_chooser_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_folder_chooser_btnActionPerformed
+       
+         JFileChooser jFileChooser = new JFileChooser();
          
-           
-          
-            try {
-                BufferedReader bufferedReader=new BufferedReader(new FileReader(f.getAbsolutePath()));
-                String s;
-                while((s=bufferedReader.readLine())!=null){
-           s1+=s+" ";
-       }bufferedReader.close();
-            } catch (FileNotFoundException ex) {
-                Logger.getLogger(DES_ENCRYPT_FILE.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(DES_ENCRYPT_FILE.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            content_file_source.setText(s1);
+          jFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
+         int x =   jFileChooser.showDialog(this, "Chọn Thư Mục chứa file mã hoá ");
+      if   (x == JFileChooser.APPROVE_OPTION) {
+        File f = jFileChooser.getSelectedFile();
+         folder_path=f.getAbsolutePath();
+          System.out.println(folder_path);
+            
       }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_folder_chooser_btnActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
          JFileChooser jFileChooser = new JFileChooser();
-         
+         s1="";
         jFileChooser.setMultiSelectionEnabled(false);
          int x =   jFileChooser.showDialog(this, "Chọn File ");
       if   (x == JFileChooser.APPROVE_OPTION) {
@@ -239,15 +266,30 @@ public String addChar(String str, char ch, int position) {
             content_file_des.setText(s1);
       }
     }//GEN-LAST:event_jButton2ActionPerformed
-
+    String keystring;
     private void encypt_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_encypt_fileActionPerformed
         // TODO add your handling code here:
-        if (txt_dir_file_encrypt.getText().isEmpty() ) {
-            showMessageDialog(rootPane, "Vui lòng chọn file cần mã hoá ");
+        int flag=1;
+         int len = txt_key.getText().length();
+      for (int i = 0; i < len; i++) {
+         // checks whether the character is not a letter
+         // if it is not a letter ,it will return false
+         if ((Character.isLetter(txt_key.getText().charAt(i)) == false)) {
+            flag=2;
+         }
+      }
+        if (txt_dir_file_encrypt1.getText().isEmpty()||txt_key.getText().isEmpty() ) {
+            showMessageDialog(rootPane, "Vui lòng chọn file cần mã hoá và key mã hoá ");
+
+        }
+        else  if(flag==2){
+                        showMessageDialog(rootPane, "Vui lòng nhập key không dấu ");
 
         }
         
-       /* if (gioiHanKyTu(txt_key.getText()) == false) {
+        
+        /*else
+        if (gioiHanKyTu(txt_key.getText()) == false) {
             txt_key.setText("");
             txt_key.setText("");
             JOptionPane.showMessageDialog(null, "Phải nhập đủ 8 ký tự!!!");
@@ -261,20 +303,13 @@ public String addChar(String str, char ch, int position) {
                     din = new DataInputStream(client.getInputStream());
                     dout = new DataOutputStream(client.getOutputStream());
                     dout.writeInt(4);
-                   
-                    dout.writeUTF(txt_dir_file_encrypt.getText());
-                    dout.writeUTF(txt_key.getText());
-                    String encypt = din.readUTF();
+                   keystring=txt_key.getText();
+                    dout.writeUTF(txt_dir_file_encrypt1.getText());
+                    dout.writeUTF(keystring);
+                     dout.writeUTF(folder_path);
                   
-                    /*result_encrypt.removeAll();
-                    result_decypt.setText("");
-                    txtUppercase.setText("");
-                    result_encrypt.setText(encypt);
-                    //result_decypt.setText(decypt);
-                    //resulten = decypt;
-                    //txtUppercase.setText(decypt.toUpperCase());
                     
-*/
+
                     String x=din.readUTF();
                      showMessageDialog(rootPane, x);
                  
@@ -291,6 +326,98 @@ public String addChar(String str, char ch, int position) {
 
         
     }//GEN-LAST:event_encypt_fileActionPerformed
+
+    private void decrypt_fileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_decrypt_fileActionPerformed
+        // TODO add your handling code here:
+         // TODO add your handling code here:
+        if (txt_dir_filedes.getText().isEmpty()||txt_key.getText().isEmpty() ) {
+            showMessageDialog(rootPane, "Vui lòng chọn file cần mã hoá và nhập key để mã hoá ");
+
+        }
+       
+       /* if (gioiHanKyTu(txt_key.getText()) == false) {
+            txt_key.setText("");
+            txt_key.setText("");
+            JOptionPane.showMessageDialog(null, "Phải nhập đủ 8 ký tự!!!");
+            return;
+        }*/ else {
+
+            try {
+                // TODO add your handling code here:
+          
+                    client = new Socket("localhost", 8080);
+                    din = new DataInputStream(client.getInputStream());
+                    dout = new DataOutputStream(client.getOutputStream());
+                    dout.writeInt(5);
+                   keystring=(txt_key.getText());
+                    dout.writeUTF(txt_dir_filedes.getText());
+                    dout.writeUTF(keystring);
+                   dout.writeUTF(folder_path);
+           
+                    
+
+                   
+                    String folder_path_1=din.readUTF();
+                     showMessageDialog(rootPane, "thành công");
+                 s1="";
+                      try {
+                BufferedReader bufferedReader=new BufferedReader(new FileReader(folder_path_1));
+                String s;
+                while((s=bufferedReader.readLine())!=null){
+           s1+=s+" ";
+       }bufferedReader.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(DES_ENCRYPT_FILE.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(DES_ENCRYPT_FILE.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            txtUppercase.setText(s1.toUpperCase());
+                     
+
+            
+                din.close();
+                dout.close();
+                client.close();
+
+            } catch (IOException ex) {
+                Logger.getLogger(loginFOrm.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }//GEN-LAST:event_decrypt_fileActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+         // TODO add your handling code here:
+        JFileChooser jFileChooser = new JFileChooser();
+        jFileChooser.setMultiSelectionEnabled(false);
+         int x =   jFileChooser.showDialog(this, "Chọn File ");
+      if   (x == JFileChooser.APPROVE_OPTION) {
+      
+          File f = jFileChooser.getSelectedFile();
+          txt_dir_file_encrypt1.setText(f.getAbsolutePath());
+         
+           
+          
+            try {
+                BufferedReader bufferedReader=new BufferedReader(new FileReader(f.getAbsolutePath()));
+                String s;
+                while((s=bufferedReader.readLine())!=null){
+           s1+=s+" ";
+       }bufferedReader.close();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(DES_ENCRYPT_FILE.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(DES_ENCRYPT_FILE.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            content_file_source.setText(s1);
+      }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -335,11 +462,13 @@ public String addChar(String str, char ch, int position) {
     private javax.swing.JTextField content_file_source;
     private javax.swing.JButton decrypt_file;
     private javax.swing.JButton encypt_file;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton folder_chooser_btn;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -350,7 +479,7 @@ public String addChar(String str, char ch, int position) {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea txtUppercase;
-    private javax.swing.JTextField txt_dir_file_encrypt;
+    private javax.swing.JTextField txt_dir_file_encrypt1;
     private javax.swing.JTextField txt_dir_filedes;
     private javax.swing.JTextField txt_key;
     // End of variables declaration//GEN-END:variables

@@ -706,14 +706,33 @@ public class ServerTcp {
                 break;
                      case 4: {
                          String plaintext_file_input = din.readUTF();
+                         
                        FileInputStream fis = new FileInputStream(plaintext_file_input);
-	FileOutputStream fos = new FileOutputStream(plaintext_file_input);
-	                       
+                         String key = din.readUTF();
+                         String folder_pathString=din.readUTF();
+                         folder_pathString+="\\encrypt.txt";
+	FileOutputStream fos = new FileOutputStream(folder_pathString);	                       
                  
-                    String key = din.readUTF();
-                     System.out.println(key);
+                   
+                  
+                
                      encrypt(key, fis, fos);   
                     dout.writeUTF("thanh cong");
+                }
+                break;
+                          case 5: {
+                           String plaintext_file_input = din.readUTF();
+                         
+                         FileInputStream fis = new FileInputStream(plaintext_file_input);
+                         String key = din.readUTF();
+                         String folder_pathString=din.readUTF();
+                         folder_pathString+="\\decrypt.txt";
+                        FileOutputStream fos = new FileOutputStream(folder_pathString);	                       
+                              System.out.println(folder_pathString);
+                   
+                     decrypt(key, fis, fos);   
+                  
+                     dout.writeUTF(folder_pathString);
                 }
                 break;
             }

@@ -45,6 +45,7 @@ public class loginFOrm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel5 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtusername = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -52,7 +53,9 @@ public class loginFOrm extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         txtpassword = new javax.swing.JPasswordField();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+
+        jLabel5.setText("jLabel5");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -92,13 +95,13 @@ public class loginFOrm extends javax.swing.JFrame {
         txtpassword.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         getContentPane().add(txtpassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 260, 212, -1));
 
-        jLabel5.setIcon(new javax.swing.ImageIcon("C:\\Users\\azure Tran\\Desktop\\photo-1513542789411-b6a5d4f31634.jpg")); // NOI18N
-        jLabel5.setText("jLabel5");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-320, 0, 990, 540));
+        jLabel6.setIcon(new javax.swing.ImageIcon("E:\\PROJECT_GROUP3\\image\\autumn-studio-zv3ckJKftC4-unsplash.jpg")); // NOI18N
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 670, 450));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
         Socket client;
+      
     DataInputStream din;
     DataOutputStream dout;
     private void btnloginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnloginActionPerformed
@@ -124,7 +127,7 @@ public class loginFOrm extends javax.swing.JFrame {
                         showMessageDialog(rootPane, "Sai tên đăng nhập ");
                     } else {
                         showMessageDialog(rootPane, "đăng nhập thành công ");
-                        new DES_ENCYPT().setVisible(true);
+                        new Menu_Main(txtusername.getText()).setVisible(true);
                         this.dispose();
                         client.close();
                     }
@@ -188,6 +191,7 @@ public class loginFOrm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPasswordField txtpassword;
     private javax.swing.JTextField txtusername;
     // End of variables declaration//GEN-END:variables
