@@ -681,7 +681,7 @@ public class ServerTcp {
 
                 }
                 break;
-                case 2: {
+               case 2: {
                     String plaintext = din.readUTF();
                     String key = din.readUTF();
 
@@ -689,6 +689,7 @@ public class ServerTcp {
 
                     String enc = cipher.getResult(plaintext, true);
                     //String dec = cipher.getResult(enc, false);
+                    
                     dout.writeUTF(enc);
                     //dout.writeUTF(dec);
                 }
@@ -703,6 +704,7 @@ public class ServerTcp {
                     //dout.writeUTF(enc);
                     dout.writeUTF(dec);
                 }
+               
                 break;
                      case 4: {
                          String plaintext_file_input = din.readUTF();

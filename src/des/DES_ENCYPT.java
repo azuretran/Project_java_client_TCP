@@ -12,6 +12,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.text.Normalizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -44,7 +45,18 @@ public class DES_ENCYPT extends javax.swing.JFrame {
         }
         return false;
     }
-
+ public static boolean isBinary(String str) {
+        int flag = 1;
+        for (int i = 0; i < str.length(); i++) {
+            if (!(str.charAt(i) == '0' || str.charAt(i) == '1')) {
+                flag++;
+            }
+        }
+        if (flag == 1) {
+            return true;
+        }
+        return false;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -100,6 +112,12 @@ public class DES_ENCYPT extends javax.swing.JFrame {
         jLabel5.setText("DECRYPT");
         getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(12, 473, -1, -1));
         getContentPane().add(txtkey, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 271, 289, 61));
+
+        txtplaintext.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtplaintextFocusGained(evt);
+            }
+        });
         getContentPane().add(txtplaintext, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 164, 289, 61));
         getContentPane().add(result_decypt, new org.netbeans.lib.awtextra.AbsoluteConstraints(125, 456, 289, 60));
 
@@ -168,21 +186,33 @@ public class DES_ENCYPT extends javax.swing.JFrame {
     String resulten;
 
     private void btn_encyptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_encyptActionPerformed
-        // TODO add your handling code here:
+         // TODO add your handling code here:
+        String s = txtkey.getText();
+        s = Normalizer.normalize(s, Normalizer.Form.NFD);
+
+        s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        s = s.replaceAll("đ", "d");
+        s = s.replaceAll("Đ", "D");
+        System.out.println(s);
         if (txtkey.getText().isEmpty() || txtplaintext.getText().isEmpty()) {
             showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin ");
 
         }
-        else if(!(txtkey.getText()).matches("[a-zA-Z_]+")){
-         showMessageDialog(rootPane, "Key không được chứa số ");
-        }
-        else
         if (gioiHanKyTu(txtkey.getText()) == false) {
             txtkey.setText("");
-            txtkey.setText("");
-            JOptionPane.showMessageDialog(null, "Phải nhập đủ 8 ký tự!!!");
+            JOptionPane.showMessageDialog(null, "Key phải nhập đủ 8 ký tự!!!");
             return;
-        } else {
+        }
+        if (!(s.matches("[a-zA-Z_]+"))) {
+            txtkey.setText("");
+            JOptionPane.showMessageDialog(null, "Key không được nhập số!!!");
+            return;
+        } //        if(isletter(txtkey.getText()) == true){
+        //            txtkey.setText("");
+        //            JOptionPane.showMessageDialog(null, "Key không được nhập dấu!!!");
+        //            return;
+        //        }
+        else {
 
             try {
                 // TODO add your handling code here:
@@ -208,7 +238,7 @@ public class DES_ENCYPT extends javax.swing.JFrame {
                     }
 
                     dout.writeUTF(txtplaintext.getText());
-                    dout.writeUTF(txtkey.getText());
+                    dout.writeUTF(s);
                     String encypt = din.readUTF();
                     //String decypt = din.readUTF();
                     /*  this.dispose();
@@ -222,7 +252,6 @@ public class DES_ENCYPT extends javax.swing.JFrame {
                     //result_decypt.setText(decypt);
                     //resulten = decypt;
                     //txtUppercase.setText(decypt.toUpperCase());
-                    
 
                     client.close();
 
@@ -239,20 +268,36 @@ public class DES_ENCYPT extends javax.swing.JFrame {
             }
         }
 
-
     }//GEN-LAST:event_btn_encyptActionPerformed
 
     private void bnt_decyptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnt_decyptActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here:
+       // TODO add your handling code here:
+         String s = txtkey.getText();
+        s = Normalizer.normalize(s, Normalizer.Form.NFD);
+
+        s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        s = s.replaceAll("đ", "d");
+        s = s.replaceAll("Đ", "D");
+        System.out.println(s);
         if (txtkey.getText().isEmpty() || txtplaintext.getText().isEmpty()) {
             showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin ");
-
+            return;
+        }
+        if (isBinary(txtplaintext.getText()) == false) {
+            txtplaintext.setText("");
+            JOptionPane.showMessageDialog(null, "Ciphertext phải là chuỗi nhị phân !!!");
+            return;
         }
         if (gioiHanKyTu(txtkey.getText()) == false) {
+
             txtkey.setText("");
+            JOptionPane.showMessageDialog(null, "Key phải nhập đủ 8 ký tự!!!");
+            return;
+        }
+
+        if (!(s.matches("[a-zA-Z_]+"))) {
             txtkey.setText("");
-            JOptionPane.showMessageDialog(null, "Phải nhập đủ 8 ký tự!!!");
+            JOptionPane.showMessageDialog(null, "Key không được nhập số!!!");
             return;
         } else {
 
@@ -266,6 +311,7 @@ public class DES_ENCYPT extends javax.swing.JFrame {
                     jProgressBar1.setStringPainted(true);
                     jProgressBar1.setForeground(Color.WHITE);
                     jProgressBar1.setBackground(Color.GREEN);
+                    jProgressBar1.setValue(0);
                     int i = 0;
                     try {
                         while (i <= 100) {
@@ -278,9 +324,9 @@ public class DES_ENCYPT extends javax.swing.JFrame {
                         }
                     } catch (Exception e) {
                     }
-
+                    result_encrypt.setText("");
                     dout.writeUTF(txtplaintext.getText());
-                    dout.writeUTF(txtkey.getText());
+                    dout.writeUTF(s);
                     //String encypt = din.readUTF();
                     String decypt = din.readUTF();
                     /*  this.dispose();
@@ -289,7 +335,7 @@ public class DES_ENCYPT extends javax.swing.JFrame {
                      */
                     result_decypt.removeAll();
                     result_decypt.setText(decypt);
-                    
+
 //                    resulten = decypt;
                     txtUppercase.setText(decypt.toUpperCase());
 
@@ -318,6 +364,12 @@ public class DES_ENCYPT extends javax.swing.JFrame {
     private void result_encryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_result_encryptActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_result_encryptActionPerformed
+
+    private void txtplaintextFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtplaintextFocusGained
+        // TODO add your handling code here:
+        txtplaintext.setText("");
+         jProgressBar1.setValue(0);
+    }//GEN-LAST:event_txtplaintextFocusGained
 
     /**
      * @param args the command line arguments
