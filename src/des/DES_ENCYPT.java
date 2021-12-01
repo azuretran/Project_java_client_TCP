@@ -45,6 +45,12 @@ public class DES_ENCYPT extends javax.swing.JFrame {
         }
         return false;
     }
+    public static boolean gioiHanKyTu1(String str) {
+        if (str.length() == 8) {
+            return true;
+        }
+        return false;
+    }
  public static boolean isBinary(String str) {
         int flag = 1;
         for (int i = 0; i < str.length(); i++) {
@@ -198,7 +204,7 @@ public class DES_ENCYPT extends javax.swing.JFrame {
             showMessageDialog(rootPane, "Vui lòng nhập đầy đủ thông tin ");
 
         }
-        if (gioiHanKyTu(txtkey.getText()) == false) {
+        if (gioiHanKyTu1(txtkey.getText()) == false) {
             txtkey.setText("");
             JOptionPane.showMessageDialog(null, "Key phải nhập đủ 8 ký tự!!!");
             return;

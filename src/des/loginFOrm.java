@@ -69,6 +69,7 @@ public class loginFOrm extends javax.swing.JFrame {
         getContentPane().add(txtusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 212, -1));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(51, 0, 204));
         jLabel2.setText("password:");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 260, -1, -1));
 

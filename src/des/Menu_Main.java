@@ -45,8 +45,11 @@ public class Menu_Main extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -77,7 +80,7 @@ public class Menu_Main extends javax.swing.JFrame {
                 jButton5ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(815, 13, 72, 62));
+        getContentPane().add(jButton5, new org.netbeans.lib.awtextra.AbsoluteConstraints(940, 10, 72, 62));
 
         jButton3.setForeground(new java.awt.Color(255, 51, 51));
         jButton3.setIcon(new javax.swing.ImageIcon("E:\\PROJECT_GROUP3\\image\\medal_champion_award_winner_olympic_icon_207789.png")); // NOI18N
@@ -91,10 +94,27 @@ public class Menu_Main extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 22)); // NOI18N
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 90, 40));
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 400));
 
-        jLabel4.setIcon(new javax.swing.ImageIcon("E:\\PROJECT_GROUP3\\image\\annie-spratt-0ZPSX_mQ3xI-unsplash (1).jpg")); // NOI18N
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 900, 400));
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 22)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 51, 0));
+        jLabel5.setText("HUỲNH LÊ MINH LUÂN -N18DCAT049");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 22)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 51, 0));
+        jLabel7.setText("TRẦN QUANG LINH-N18DCAT040 (NHÓM TRƯỞNG)");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Times New Roman", 1, 22)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 51, 0));
+        jLabel8.setText("LÊ VĂN BẮC-N18DCAT007");
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon("E:\\PROJECT_GROUP3\\image\\admin_person_user_man_2839.png")); // NOI18N
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\PROJECT_GROUP3\\image\\annie-spratt-0ZPSX_mQ3xI-unsplash (1).jpg")); // NOI18N
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1020, 490));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -132,6 +152,9 @@ public class Menu_Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     // End of variables declaration//GEN-END:variables
 }
