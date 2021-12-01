@@ -30,17 +30,17 @@ public class DES_ENCYPT extends javax.swing.JFrame {
      * Creates new form NewJFrame
      */
     ImageIcon icon;
-
-    public DES_ENCYPT() {
+    String username;
+    public DES_ENCYPT(String x) {
         initComponents();
         setTitle("ĐÔ ÁN CUỐI KÌ NHÓM 3");
-
+        username=x;
         icon = new ImageIcon("image/icon.jpg");
         setIconImage(icon.getImage());
     }
 
     public static boolean gioiHanKyTu(String str) {
-        if (str.length() == 8) {
+        if (str.length() >= 8) {
             return true;
         }
         return false;
@@ -358,7 +358,8 @@ public class DES_ENCYPT extends javax.swing.JFrame {
 
     private void btn_back_homeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_back_homeActionPerformed
         // TODO add your handling code here:
-        System.exit(0);
+        new Menu_Main(username).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btn_back_homeActionPerformed
 
     private void result_encryptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_result_encryptActionPerformed
@@ -374,40 +375,7 @@ public class DES_ENCYPT extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DES_ENCYPT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DES_ENCYPT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DES_ENCYPT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DES_ENCYPT.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DES_ENCYPT().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bnt_decypt;

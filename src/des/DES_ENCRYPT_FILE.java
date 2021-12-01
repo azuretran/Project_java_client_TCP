@@ -45,11 +45,11 @@ public class DES_ENCRYPT_FILE extends javax.swing.JFrame {
      * Creates new form GiaoDienBai2
      */
       ImageIcon icon;
-      
-    public DES_ENCRYPT_FILE() {
+      String username;
+    public DES_ENCRYPT_FILE(String x) {
         initComponents();
          setTitle("ĐÔ ÁN CUỐI KÌ NHÓM 3");
-
+        username=x;
         icon = new ImageIcon("image/icon.jpg");
         setIconImage(icon.getImage());
     }
@@ -271,6 +271,7 @@ public String toHex(String arg) {
         // TODO add your handling code here:
         int flag=1;
          int len = txt_key.getText().length();
+         
       for (int i = 0; i < len; i++) {
          // checks whether the character is not a letter
          // if it is not a letter ,it will return false
@@ -279,22 +280,21 @@ public String toHex(String arg) {
          }
       }
         if (txt_dir_file_encrypt1.getText().isEmpty()||txt_key.getText().isEmpty() ) {
-            showMessageDialog(rootPane, "Vui lòng chọn file cần mã hoá và key mã hoá ");
+            showMessageDialog(rootPane, "Vui lòng chọn file cần mã hoá và key mã hoá ","Lỗi", JOptionPane.ERROR_MESSAGE);
 
         }
-        else  if(flag==2){
-                        showMessageDialog(rootPane, "Vui lòng nhập key không dấu ");
-
+        else if(folder_path==""){
+              
+              showMessageDialog(rootPane, "vui lòng chọn folder ", "thông báo", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
-        /*else
+      else
         if (gioiHanKyTu(txt_key.getText()) == false) {
             txt_key.setText("");
             txt_key.setText("");
             JOptionPane.showMessageDialog(null, "Phải nhập đủ 8 ký tự!!!");
             return;
-        }*/ else {
+        }
+        else {
 
             try {
                 // TODO add your handling code here:
@@ -311,7 +311,7 @@ public String toHex(String arg) {
                     
 
                     String x=din.readUTF();
-                     showMessageDialog(rootPane, x);
+            showMessageDialog(rootPane,x,"Thành Công", JOptionPane.DEFAULT_OPTION);
                  
 
             
@@ -335,12 +335,12 @@ public String toHex(String arg) {
 
         }
        
-       /* if (gioiHanKyTu(txt_key.getText()) == false) {
+       else if (gioiHanKyTu(txt_key.getText()) == false) {
             txt_key.setText("");
             txt_key.setText("");
             JOptionPane.showMessageDialog(null, "Phải nhập đủ 8 ký tự!!!");
             return;
-        }*/ else {
+        } else {
 
             try {
                 // TODO add your handling code here:
@@ -416,46 +416,14 @@ public String toHex(String arg) {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        
+          new Menu_Main(username).setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DES_ENCRYPT_FILE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DES_ENCRYPT_FILE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DES_ENCRYPT_FILE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DES_ENCRYPT_FILE.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new DES_ENCRYPT_FILE().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField content_file_des;
