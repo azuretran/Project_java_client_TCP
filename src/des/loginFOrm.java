@@ -66,6 +66,14 @@ public class loginFOrm extends javax.swing.JFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 180, -1, -1));
 
         txtusername.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        txtusername.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                txtusernameFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                txtusernameFocusLost(evt);
+            }
+        });
         getContentPane().add(txtusername, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 180, 212, -1));
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
@@ -149,6 +157,16 @@ public class loginFOrm extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnloginActionPerformed
+
+    private void txtusernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtusernameFocusLost
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_txtusernameFocusLost
+
+    private void txtusernameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_txtusernameFocusGained
+        // TODO add your handling code here:txtusername
+     
+    }//GEN-LAST:event_txtusernameFocusGained
 
     /**
      * @param args the command line arguments

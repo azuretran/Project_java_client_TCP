@@ -41,6 +41,13 @@ public class ServerTcp {
     /* encrypt file and decrypt file
     
    */
+    /*
+    - Dùng 1 mật mã (password) tùy thích để mã hóa nội dung trong tập tin plaintext.txt và nội dung mã hóa được lưu lại trong tập tin cipher.txt. 
+    - Cũng dùng mật mã trên để giải mã nội dung trong tập tin cipher.txt và lưu nội dung giải mã này trong tập tin plaintext1.txt
+    Trước khi lập trình phải bảo đảm trong máy tính của bạn đã có:
+    - Java Development Kid (JDK).
+    - Java Cryptography Extension (JCE).
+    */
     public static void encrypt(String key, InputStream is, OutputStream os) throws Throwable {
 		encryptOrDecrypt(key, Cipher.ENCRYPT_MODE, is, os);
 	}
@@ -50,17 +57,29 @@ public class ServerTcp {
 	}
 
 	public static void encryptOrDecrypt(String key, int mode, InputStream is, OutputStream os) throws Throwable {
-
+                                /*
+                                  Tạo 1 DES Key dựa trên password (input key)
+                                  Password chỉ là 1 chuỗi ký tự bình thường nên tính bảo mật không cao. Do đó, khi sử dụng một thuật toán mã hóa mào đó, 
+                            password phải được mã hóa theo một dạng nhật định được gọi là Key, trong trường hợp sử dụng thuật toán DES nên gọi là DES Key.
+                    - Đầu tiên  pasword được chuyển thành mảng byte.
+                      - Sử dụng class DESKeySpec tạo ra DES Key .
+                    - Sử dụng  class SecretKeyFactory để chỉ ra thuật toán nào dùng cho mã hóa key.
+                            - class SecretKey chứa kết quả của quá trình mã hóa key .  
+            
+                        */
 		DESKeySpec dks = new DESKeySpec(key.getBytes());
 		SecretKeyFactory skf = SecretKeyFactory.getInstance("DES");
 		SecretKey desKey = skf.generateSecret(dks);
-		Cipher cipher = Cipher.getInstance("DES"); // DES/ECB/PKCS5Padding for SunJCE
-
+		Cipher cipher = Cipher.getInstance("DES"); // DES/ECB (tieu chuan)/PKCS5Padding for SunJCE
+                            /*Mã hóa nội dung tập tin plaintext.txt*/
 		if (mode == Cipher.ENCRYPT_MODE) {
+                                        /*chọn phương thức mã hoá*/
 			cipher.init(Cipher.ENCRYPT_MODE, desKey);
 			CipherInputStream cis = new CipherInputStream(is, cipher);
+                        /*ghi nội dung mã hoá vào file*/
 			doCopy(cis, os);
 		} else if (mode == Cipher.DECRYPT_MODE) {
+                    /*Giải mã nội dung tập tin ciphertext.txt: */
 			cipher.init(Cipher.DECRYPT_MODE, desKey);
 			CipherOutputStream cos = new CipherOutputStream(os, cipher);
 			doCopy(is, cos);
